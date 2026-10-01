@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AgroNode · Open infrastructure for the physical world</title>
+    <meta
+      name="description"
+      content="AgroNode connects sensors, devices and real-world environments to modern software infrastructure."
+    />
+    <link rel="canonical" href="http://localhost:5173/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="AgroNode · Open infrastructure for the physical world" />
+    <meta
+      property="og:description"
+      content="AgroNode connects sensors, devices and real-world environments to modern software infrastructure."
+    />
+    <meta property="og:url" content="http://localhost:5173/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AgroNode · Open infrastructure for the physical world" />
+    <meta
+      name="twitter:description"
+      content="AgroNode connects sensors, devices and real-world environments to modern software infrastructure."
+    />
+    <meta name="twitter:url" content="http://localhost:5173/" />
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+
+      html,
+      body {
+        margin: 0;
+        background: #090d0c;
+        color: #dce7e1;
+        font-family: Inter, 'Segoe UI', Roboto, system-ui, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      .critical-top {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      .navbar-wrap {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        border-bottom: 1px solid #1f2b26;
+        background: rgba(9, 13, 12, 0.88);
+      }
+
+      .navbar {
+        max-width: 1160px;
+        margin: 0 auto;
+        min-height: 68px;
+        padding: 0.8rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .brand {
+        color: #8ee2af;
+        font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 0.9rem;
+        letter-spacing: 0.14em;
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 0.92rem;
+      }
+
+      .nav-links a {
+        color: #95ada2;
+        text-decoration: none;
+      }
+
+      .mobile-toggle {
+        display: none;
+        border: 1px solid #1f2b26;
+        background: #0f1513;
+        color: #dce7e1;
+        padding: 0.45rem;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #6fbf8f;
+        background: rgba(111, 191, 143, 0.12);
+        color: #8ee2af;
+        padding: 0.58rem 1rem;
+        font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 0.82rem;
+        text-decoration: none;
+      }
+
+      .section {
+        border: 1px solid #1f2b26;
+        background: linear-gradient(180deg, #0f1513, #121b18);
+        padding: 2.2rem;
+        margin-top: 1rem;
+      }
+
+      .hero {
+        text-align: center;
+        padding-top: 3.2rem;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid #6fbf8f;
+        color: #8ee2af;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        padding: 0.2rem 0.55rem;
+      }
+
+      .hero h1 {
+        margin: 0.8rem auto;
+        font-size: clamp(2rem, 6vw, 3.8rem);
+        line-height: 1.15;
+        max-width: 15ch;
+      }
+
+      .lead,
+      .section-copy {
+        color: #95ada2;
+        max-width: 68ch;
+        margin-inline: auto;
+      }
+
+      .hero-flow {
+        margin: 2rem auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.55rem;
+        flex-wrap: wrap;
+        max-width: 900px;
+      }
+
+      .flow-step {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+      }
+
+      .flow-node {
+        border: 1px solid #1f2b26;
+        background: #0a1110;
+        padding: 0.55rem 0.8rem;
+        min-width: 132px;
+        font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 0.81rem;
+        text-align: center;
+      }
+
+      .flow-arrow {
+        color: #6fbf8f;
+      }
+
+      .inline-list {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 0;
+        list-style: none;
+      }
+
+      .inline-list li {
+        border: 1px solid #1f2b26;
+        padding: 0.35rem 0.6rem;
+        font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 0.78rem;
+        color: #95ada2;
+      }
+
+      .skip-link {
+        position: absolute;
+        left: 1rem;
+        top: -4rem;
+        padding: 0.6rem 0.9rem;
+        border: 1px solid #6fbf8f;
+        background: #0f1513;
+        z-index: 30;
+        color: #dce7e1;
+        text-decoration: none;
+      }
+
+      .skip-link:focus-visible {
+        top: 1rem;
+      }
+
+      @media (max-width: 960px) {
+        .mobile-toggle {
+          display: inline-flex;
+        }
+
+        .nav-links {
+          display: none;
+          position: absolute;
+          top: 100%;
+          right: 0.8rem;
+          left: 0.8rem;
+          padding: 0.8rem;
+          border: 1px solid #1f2b26;
+          background: #0a1110;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .nav-links.open {
+          display: flex;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+
+    <header class="navbar-wrap">
+      <nav class="navbar" aria-label="Main navigation">
+        <a href="#top" class="brand" aria-label="AgroNode homepage">AGRONODE</a>
+        <button
+          class="mobile-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="static-nav-links"
+          aria-label="Open menu"
+          id="static-nav-toggle"
+        >
+          ☰
+        </button>
+        <div id="static-nav-links" class="nav-links">
+          <a href="#architecture">Architecture</a>
+          <a href="#use-cases">Use Cases</a>
+          <a href="#live-demo">Demo</a>
+          <a href="#hardware">Hardware</a>
+          <a href="#roadmap">Roadmap</a>
+          <a class="button" href="https://github.com/osmanhadzic/agronode" target="_blank" rel="noreferrer"
+            >GitHub</a
+          >
+        </div>
+      </nav>
+    </header>
+
+    <div class="critical-top">
+      <section id="top" class="section hero" aria-labelledby="hero-title">
+        <div class="badge">OPEN SOURCE · IoT</div>
+        <h1 id="hero-title">Open infrastructure for the physical world.</h1>
+        <p class="lead">
+          AgroNode connects sensors, devices and real-world environments to modern software
+          infrastructure.
+        </p>
+
+        <div class="hero-flow" aria-label="AgroNode data flow">
+          <div class="flow-step"><div class="flow-node">ESP32</div><span class="flow-arrow">↓</span></div>
+          <div class="flow-step"><div class="flow-node">MQTT</div><span class="flow-arrow">↓</span></div>
+          <div class="flow-step"><div class="flow-node">AgroNode</div><span class="flow-arrow">↓</span></div>
+          <div class="flow-step"><div class="flow-node">Data</div><span class="flow-arrow">↓</span></div>
+          <div class="flow-step"><div class="flow-node">Dashboard</div></div>
+        </div>
+      </section>
+
+      <section id="what-is" class="section" aria-labelledby="what-is-title">
+        <h2 id="what-is-title">What is AgroNode?</h2>
+        <p class="section-copy">
+          AgroNode is open-source IoT infrastructure focused on connecting physical systems to modern
+          software platforms. It is not a dashboard product or SaaS panel: it is reusable
+          infrastructure for sensors, devices, telemetry transport, identity and backend services.
+        </p>
+        <ul class="inline-list" aria-label="Primary audiences">
+          <li>FOSDEM attendees</li>
+          <li>Open-source developers</li>
+          <li>IoT developers</li>
+          <li>Embedded developers</li>
+          <li>Backend developers</li>
+          <li>DevOps engineers</li>
+          <li>Makers</li>
+          <li>Researchers</li>
+          <li>Potential contributors</li>
+        </ul>
+      </section>
+    </div>
+
+    <div id="root"></div>
+
+    <script>
+      const navToggle = document.getElementById('static-nav-toggle')
+      const navLinks = document.getElementById('static-nav-links')
+
+      if (navToggle && navLinks) {
+        navToggle.addEventListener('click', () => {
+          const isOpen = navLinks.classList.toggle('open')
+          navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false')
+          navToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu')
+          navToggle.textContent = isOpen ? '✕' : '☰'
+        })
+
+        navLinks.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => {
+            navLinks.classList.remove('open')
+            navToggle.setAttribute('aria-expanded', 'false')
+            navToggle.setAttribute('aria-label', 'Open menu')
+            navToggle.textContent = '☰'
+          })
+        })
+      }
+    </script>
+
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
