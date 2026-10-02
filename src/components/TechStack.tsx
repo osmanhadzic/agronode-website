@@ -1,12 +1,14 @@
-import { techStack } from '../data/project'
+import { useI18n } from '../i18n/I18nProvider'
 
 function TechStack() {
+  const { content } = useI18n()
+
   return (
     <section id="tech-stack" className="section" aria-labelledby="tech-title">
-      <h2 id="tech-title">Technology stack</h2>
-      <p className="section-copy">Core technologies powering embedded, transport, backend and frontend layers.</p>
+      <h2 id="tech-title">{content.stack.title}</h2>
+      <p className="section-copy">{content.stack.copy}</p>
       <div className="stack-grid">
-        {techStack.map((item) => (
+        {content.stack.items.map((item) => (
           <span key={item} className="stack-badge">
             {item}
           </span>

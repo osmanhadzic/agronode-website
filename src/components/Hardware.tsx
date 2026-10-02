@@ -1,5 +1,5 @@
 import { Cpu, Leaf, Mic, Scale, Sprout, TowerControl } from 'lucide-react'
-import { hardwareGroups } from '../data/project'
+import { useI18n } from '../i18n/I18nProvider'
 
 const groupIcons = {
   Environmental: Leaf,
@@ -10,18 +10,31 @@ const groupIcons = {
 }
 
 function Hardware() {
+  const { content } = useI18n()
+
   return (
     <section id="hardware" className="section" aria-labelledby="hardware-title">
-      <h2 id="hardware-title">Hardware</h2>
-      <p className="section-copy">Reference hardware currently used across environmental and edge deployments.</p>
+      <h2 id="hardware-title">{content.hardware.title}</h2>
+      <p className="section-copy">{content.hardware.copy}</p>
 
       <div className="card-grid hardware-grid">
-        {hardwareGroups.map((group) => {
-          const Icon = groupIcons[group.category as keyof typeof groupIcons] ?? Cpu
+        {content.hardware.groups.map((group) => {
+          const iconKey =
+            group.key === 'environmental'
+              ? 'Environmental'
+              : group.key === 'soil'
+                ? 'Soil'
+                : group.key === 'weight'
+                  ? 'Weight'
+                  : group.key === 'audio'
+                    ? 'Audio'
+                    : 'Edge/Gateway'
+
+          const Icon = groupIcons[iconKey as keyof typeof groupIcons] ?? Cpu
           return (
-            <article key={group.category} className="card">
+            <article key={group.key} className="card">
               <h3>
-                <Icon size={16} /> {group.category}
+                <Icon size={16} /> {group.title}
               </h3>
               <ul>
                 {group.items.map((item) => (

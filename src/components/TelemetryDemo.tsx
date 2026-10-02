@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useI18n } from '../i18n/I18nProvider'
 
 type TelemetryState = {
   temperature: number
@@ -17,6 +18,8 @@ const formatLastSeen = () => new Date().toLocaleTimeString([], { hour: '2-digit'
 const randomRange = (min: number, max: number) => min + Math.random() * (max - min)
 
 function TelemetryDemo() {
+  const { content } = useI18n()
+
   const [telemetry, setTelemetry] = useState<TelemetryState>({
     temperature: 24.2,
     humidity: 58.4,
@@ -69,26 +72,28 @@ function TelemetryDemo() {
 
   return (
     <section id="live-demo" className="section" aria-labelledby="demo-title">
-      <h2 id="demo-title">Live telemetry demo</h2>
+      <h2 id="demo-title">{content.demo.title}</h2>
       <p className="section-copy">
-        Simulated dashboard values for demonstration only. <span className="tag">DEMO DATA</span>
+        {content.demo.copy} <span className="tag">{content.demo.tag}</span>
       </p>
 
       <article className="card telemetry-card" aria-live="polite">
         <div className="metrics-grid">
-          <p><span>Temperature</span><strong>{telemetry.temperature}°C</strong></p>
-          <p><span>Humidity</span><strong>{telemetry.humidity}%</strong></p>
-          <p><span>Soil moisture</span><strong>{telemetry.soil}%</strong></p>
-          <p><span>Battery</span><strong>{telemetry.battery}%</strong></p>
-          <p><span>Signal strength</span><strong>{telemetry.signal} dBm</strong></p>
+          <p><span>{content.demo.labels.temperature}</span><strong>{telemetry.temperature}°C</strong></p>
+          <p><span>{content.demo.labels.humidity}</span><strong>{telemetry.humidity}%</strong></p>
+          <p><span>{content.demo.labels.soilMoisture}</span><strong>{telemetry.soil}%</strong></p>
+          <p><span>{content.demo.labels.battery}</span><strong>{telemetry.battery}%</strong></p>
+          <p><span>{content.demo.labels.signalStrength}</span><strong>{telemetry.signal} dBm</strong></p>
           <p>
-            <span>Device status</span>
-            <strong className={telemetry.status === 'online' ? 'ok' : 'warn'}>{telemetry.status}</strong>
+            <span>{content.demo.labels.deviceStatus}</span>
+            <strong className={telemetry.status === 'online' ? 'ok' : 'warn'}>
+              {telemetry.status === 'online' ? content.demo.status.online : content.demo.status.degraded}
+            </strong>
           </p>
-          <p><span>Last seen</span><strong>{telemetry.lastSeen}</strong></p>
+          <p><span>{content.demo.labels.lastSeen}</span><strong>{telemetry.lastSeen}</strong></p>
         </div>
 
-        <div className="chart-wrap" role="img" aria-label="Telemetry trend chart">
+        <div className="chart-wrap" role="img" aria-label={content.demo.labels.trendAria}>
           <svg viewBox="0 0 100 100" preserveAspectRatio="none">
             <polyline points={points} />
           </svg>

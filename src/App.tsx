@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect } from 'react'
 import { siteUrl } from './config/site'
+import { useI18n } from './i18n/I18nProvider'
 
 const Architecture = lazy(() => import('./components/Architecture'))
 const UseCases = lazy(() => import('./components/UseCases'))
@@ -12,15 +13,15 @@ const Roadmap = lazy(() => import('./components/Roadmap'))
 const Fosdem = lazy(() => import('./components/Fosdem'))
 const Footer = lazy(() => import('./components/Footer'))
 
-const description =
-  'AgroNode connects sensors, devices and real-world environments to modern software infrastructure.'
-
 function App() {
+  const { content, language } = useI18n()
+
   useEffect(() => {
-    document.title = 'AgroNode · Open infrastructure for the physical world'
+    document.documentElement.lang = language
+    document.title = content.meta.title
 
     const metaDescription = document.querySelector<HTMLMetaElement>('meta[name="description"]')
-    if (metaDescription) metaDescription.content = description
+    if (metaDescription) metaDescription.content = content.meta.description
 
     const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
     if (canonical) canonical.href = `${siteUrl}/`
@@ -30,7 +31,7 @@ function App() {
 
     const twitterUrl = document.querySelector<HTMLMetaElement>('meta[name="twitter:url"]')
     if (twitterUrl) twitterUrl.content = `${siteUrl}/`
-  }, [])
+  }, [content.meta.description, content.meta.title, language])
 
   return (
     <>
@@ -48,13 +49,12 @@ function App() {
         </Suspense>
 
         <section id="contributing" className="section" aria-labelledby="contributing-title">
-          <h2 id="contributing-title">Contributing</h2>
+          <h2 id="contributing-title">{content.contributing.title}</h2>
           <p className="section-copy">
-            AgroNode welcomes contributors from embedded, backend, frontend, DevOps and research
-            backgrounds. Open issues and discussions are available in the main repository.
+            {content.contributing.copy}
           </p>
           <a className="button" href="https://github.com/osmanhadzic/agronode" target="_blank" rel="noreferrer">
-            Start contributing
+            {content.contributing.cta}
           </a>
         </section>
       </main>
