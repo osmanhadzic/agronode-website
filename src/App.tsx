@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import { siteUrl } from './config/site'
 import { useI18n } from './i18n/I18nProvider'
 
@@ -62,6 +63,8 @@ function App() {
       <Suspense fallback={null}>
         <Footer />
       </Suspense>
+
+      <Analytics />
     </>
   )
 }
